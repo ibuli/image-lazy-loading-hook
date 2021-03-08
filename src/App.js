@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { ImageLazy } from "./components/ImageLazy";
+import { LoremIpsum } from "./components/LoremIpsum";
+import { images } from "./data/images";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>
+        Image lazy loading using{" "}
+        <pre className="d-inline">IntersectionObserver</pre> API.
+      </h1>
+
+      {/* LoremIpsum text to keep images below viewport */}
+      <LoremIpsum />
+
+      <div className="container">
+        {images.map((image, index) => (
+          <div className="image-container" key={index}>
+            <ImageLazy
+              thumbnail={image.thumbnail}
+              highResImage={image.highResImage}
+              altText={image.altText}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
